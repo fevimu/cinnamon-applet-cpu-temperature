@@ -175,6 +175,8 @@ MyApplet.prototype = {
     _findTemperatureFromFiles: function(){
         let info = new Array();
         let temp_files = [
+	// lm-sensors report as of 3.3.5
+	'/usr/local/bin/sensors',
         //hwmon for new 2.6.39, 3.x linux kernels
         '/sys/class/hwmon/hwmon0/temp1_input',
         '/sys/devices/platform/coretemp.0/temp1_input',
