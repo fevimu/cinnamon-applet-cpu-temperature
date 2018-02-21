@@ -93,9 +93,13 @@ MyApplet.prototype = {
                         if (adapter=='isa'){
                             for (let cpu in tempInfo[adapter]){
                                 items.push("ISA Adapter "+cpu+": ");
+				t_max = 0;
                                 for (let core in tempInfo[adapter][cpu]){
                                     s+=tempInfo[adapter][cpu][core]['temp'];
                                     n++;
+				    if(tempInfo[adapter][cpu][core]['temp'] > t_max){
+					    t_max = tempInfo[adapter][cpu][core]['temp'];
+				    }
                                     items.push(core+' : '+this._formatTemp(tempInfo[adapter][cpu][core]['temp']));
                                 }
                             }
@@ -110,7 +114,7 @@ MyApplet.prototype = {
                 
                 
                 if (n!=0){//if temperature is detected
-                    this.title=this._formatTemp(s/n);//set title as average
+                    this.title=this._formatTemp(t_max);//set title as max
                 }
             }
         }
